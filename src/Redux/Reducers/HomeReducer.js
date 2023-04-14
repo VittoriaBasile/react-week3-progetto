@@ -1,11 +1,15 @@
 import { GET_POP } from "../ACTIONS";
 import { GET_ROCK } from "../ACTIONS";
 import { GET_HIP_HOP } from "../ACTIONS";
+import { GET_SONG } from "../ACTIONS";
+import { SEARCH_SONG } from "../ACTIONS";
 
 const initialState = {
   pop: [],
   rock: [],
   hiphop: [],
+  search: [],
+  query: "",
 };
 
 const HomeReducer = (state = initialState, action) => {
@@ -25,6 +29,17 @@ const HomeReducer = (state = initialState, action) => {
         ...state,
         hiphop: action.payload,
       };
+    case GET_SONG:
+      return {
+        ...state,
+        query: action.payload,
+      };
+    case SEARCH_SONG:
+      return {
+        ...state,
+        query: action.payload,
+      };
+
     default:
       return state;
   }

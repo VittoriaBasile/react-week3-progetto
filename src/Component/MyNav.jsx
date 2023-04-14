@@ -1,7 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import spotifyLogo from "../logo/Spotify_Logo.png";
 import { FaHome, FaBookOpen } from "react-icons/fa";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getQueryAction } from "../Redux/ACTIONS/index";
+import { Button, Form } from "react-bootstrap";
 const MyNav = () => {
+  const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(getQueryAction(search));
+    setSearch("");
+  };
   return (
     <nav className="navbar navbar-expand-md navbar-white bg-navbar fixed-left justify-content-between" id="sidebar">
       <div className="nav-container">
@@ -34,28 +47,32 @@ const MyNav = () => {
                   &nbsp; Your Library
                 </Link>
               </li>
-              <li>
-                <div className="input-group mt-3">
-                  <input
-                    type="text"
-                    className="form-control mb-2"
-                    id="searchField"
-                    placeholder="Search"
-                    aria-label="Search"
-                    aria-describedby="basic-addon2"
-                  />
-                  <div className="input-group-append px-2" style={{ marginBottom: "4%" }}>
-                    <button
-                      className="btn btn-outline-secondary btn-sm"
-                      type="button"
-                      id="button-addon1"
-                      onclick="search()"
-                    >
-                      GO
-                    </button>
-                  </div>
-                </div>
-              </li>
+              {location.pathname === "/" && (
+                <li>
+                  <Form className="input-group mt-3" onSubmit={handleSubmit}>
+                    <input
+                      type="text"
+                      className="form-control mb-2"
+                      id="searchField"
+                      placeholder="Search"
+                      aria-label="Search"
+                      aria-describedby="basic-addon2"
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                    />
+                    <div className="input-group-append" style={{ marginBottom: "4%" }}>
+                      <Button
+                        className="btn btn-outline-secondary"
+                        onClick={handleSubmit}
+                        type="submit"
+                        id="button-addon1"
+                      >
+                        GO
+                      </Button>
+                    </div>
+                  </Form>
+                </li>
+              )}
             </ul>
           </div>
         </div>
