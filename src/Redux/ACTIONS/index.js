@@ -1,22 +1,14 @@
-export const ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
-export const DELETE = "DELETE";
-export const FETCH_RESULTS = "FETCH_RESULTS";
-export const RESET_RESULTS = "RESET_RESULTS";
+export const GET_ROCK = "GET_ROCK ";
+export const GET_POP = "GET_POP ";
+export const GET_HIP_HOP = " GET_HIP_POP";
 
-export const resetResultsAction = () => ({ type: RESET_RESULTS });
-
-export const addToFavouritesAction = data => ({ type: ADD_TO_FAVOURITES, payload: data });
-export const removeFromFavouritesAction = index => ({ type: DELETE, payload: index });
-export const getCompanyAction = params => {
-  return async dispatch => {
-    const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?company=";
+export const getPopAction = (url) => {
+  return async (dispatch) => {
     try {
-      const response = await fetch(baseEndpoint + params.companyName);
+      const response = await fetch(url);
       if (response.ok) {
-        const { data } = await response.json();
-        dispatch({ type: FETCH_RESULTS, payload: data });
-      } else {
-        alert("Error fetching results");
+        let songs = await response.json();
+        dispatch({ type: GET_POP, payload: songs.data });
       }
     } catch (error) {
       console.log(error);
@@ -24,16 +16,26 @@ export const getCompanyAction = params => {
   };
 };
 
-export const getJobsAction = query => {
-  return async dispatch => {
-    const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search=";
+export const getRockAction = (url) => {
+  return async (dispatch) => {
     try {
-      const response = await fetch(baseEndpoint + query + "&limit=20");
+      const response = await fetch(url);
       if (response.ok) {
-        const { data } = await response.json();
-        dispatch({ type: FETCH_RESULTS, payload: data });
-      } else {
-        alert("Error fetching results");
+        let songs = await response.json();
+        dispatch({ type: GET_ROCK, payload: songs.data });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const getHipHopAction = (url) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        let songs = await response.json();
+        dispatch({ type: GET_HIP_HOP, payload: songs.data });
       }
     } catch (error) {
       console.log(error);
