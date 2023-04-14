@@ -31,10 +31,10 @@ const MainAlbum = () => {
           <Col md={3} className="pt-5 text-center" id="img-container">
             <img src={album.cover_medium} alt="" />
           </Col>
-          <Col md={8} className="p-5">
+          <Col md={9} className="pt-5">
             <Row>
               {album.tracks.data.map((track) => (
-                <Col key={track.id} md={10} className="mb-5" id="trackList">
+                <Col xs={12} key={track.id} md={10} className="mb-5 offset-1">
                   <MyTrack track={track} />
                 </Col>
               ))}

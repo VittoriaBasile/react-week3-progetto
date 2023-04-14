@@ -16,7 +16,10 @@ const MyNav = () => {
     setSearch("");
   };
   return (
-    <nav className="navbar navbar-expand-md navbar-white bg-navbar fixed-left justify-content-between" id="sidebar">
+    <nav
+      className="navbar navbar-expand-md navbar-white bg-navbar fixed-left justify-content-between px-2"
+      id="sidebar"
+    >
       <div className="nav-container">
         <Link className="navbar-brand" to="/">
           <img src={spotifyLogo} alt="Spotify_Logo" width={131} height={40} />
@@ -61,7 +64,7 @@ const MyNav = () => {
                       onChange={(e) => setSearch(e.target.value)}
                     />
                     <div className="input-group-append" style={{ marginBottom: "4%" }}>
-                      <Button className="btn btn-outline-secondary" type="submit" id="button-addon1">
+                      <Button className="btn btn-secondary ms-2" type="submit" id="button-addon1">
                         GO
                       </Button>
                     </div>
