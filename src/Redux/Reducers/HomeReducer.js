@@ -37,7 +37,7 @@ const HomeReducer = (state = initialState, action) => {
     case SEARCH_SONG:
       return {
         ...state,
-        query: action.payload,
+        search: action.payload,
       };
 
     default:

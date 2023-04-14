@@ -61,12 +61,7 @@ const MyNav = () => {
                       onChange={(e) => setSearch(e.target.value)}
                     />
                     <div className="input-group-append" style={{ marginBottom: "4%" }}>
-                      <Button
-                        className="btn btn-outline-secondary"
-                        onClick={handleSubmit}
-                        type="submit"
-                        id="button-addon1"
-                      >
+                      <Button className="btn btn-outline-secondary" type="submit" id="button-addon1">
                         GO
                       </Button>
                     </div>

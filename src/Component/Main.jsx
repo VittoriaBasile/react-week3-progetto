@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MyCard from "./MyCard";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getHipHopAction, getPopAction, getQueryAction, getRockAction } from "../Redux/ACTIONS/index";
+import { cercaAction, getHipHopAction, getPopAction, getQueryAction, getRockAction } from "../Redux/ACTIONS/index";
 
 const Main = () => {
   const rockSongs = useSelector((state) => state.home.rock);
@@ -23,7 +23,7 @@ const Main = () => {
     dispatch(getHipHopAction(hipHopEndpoint));
 
     if (query !== "") {
-      dispatch(getQueryAction(query));
+      dispatch(cercaAction(searchEndpoint));
     }
   }, [query]);
 

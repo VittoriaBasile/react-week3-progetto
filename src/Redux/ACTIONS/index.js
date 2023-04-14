@@ -45,14 +45,13 @@ export const getHipHopAction = (url) => {
   };
 };
 
-export const cercaAction = async (url) => {
+export const cercaAction = (url) => {
   return async (dispatch) => {
     try {
       const response = await fetch(url);
       if (response.ok) {
-        let song = await response.json();
-
-        dispatch({ type: SEARCH_SONG, payload: song.data });
+        let songs = await response.json();
+        dispatch({ type: SEARCH_SONG, payload: songs.data });
       }
     } catch (error) {
       console.log(error);
