@@ -1,24 +1,26 @@
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MyCard from "./MyCard";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getHipHopAction, getPopAction, getRockAction } from "../Redux/ACTIONS";
+import { useDispatch, useSelector } from "react-redux";
+import { getHipHopAction, getPopAction, getRockAction } from "../Redux/ACTIONS/index";
 
 const Main = () => {
-  const endpointRock = "https://striveschool-api.herokuapp.com/api/deezer/search?q=rock%20classics";
-  const endpointPop = "https://striveschool-api.herokuapp.com/api/deezer/search?q=pop";
-  const endpointHipPop = "https://striveschool-api.herokuapp.com/api/deezer/search?q=hip%20pop";
+  const rockEndpoint = "https://striveschool-api.herokuapp.com/api/deezer/search?q=rock%20classics";
+  const popEndpoint = "https://striveschool-api.herokuapp.com/api/deezer/search?q=pop%20culture";
+  const hipHopEndpoint = "https://striveschool-api.herokuapp.com/api/deezer/search?q=hip%20hop";
   const dispatch = useDispatch();
-  const pop = useSelector((state) => state.home.pop);
-  const rock = useSelector((state) => state.home.rock);
-  const hiphop = useSelector((state) => state.home.hiphop);
 
   useEffect(() => {
-    dispatch(getRockAction(endpointRock));
-    dispatch(getPopAction(endpointPop));
-    dispatch(getHipHopAction(endpointHipPop));
+    dispatch(getRockAction(rockEndpoint));
+    dispatch(getPopAction(popEndpoint));
+    dispatch(getHipHopAction(hipHopEndpoint));
   }, []);
+
+  const rockSongs = useSelector((state) => state.home.rock);
+  const popSongs = useSelector((state) => state.home.pop);
+  const hipHopSongs = useSelector((state) => state.home.hiphop);
+
   return (
     <>
       <Row>
@@ -33,12 +35,10 @@ const Main = () => {
 
       <Row>
         <Col xs={10}>
-          <div id="searchResults" style={{ display: "none" }}>
+          <div id="searchResults">
             <h2>Search Results</h2>
             <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3">
-              <Col className="text-center" id="id">
-                <MyCard />
-              </Col>
+              <Col className="text-center" id="id"></Col>
             </Row>
           </div>
         </Col>
@@ -49,11 +49,15 @@ const Main = () => {
           <div id="rock">
             <h2>Rock Classics</h2>
             <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3" id="rockSection">
-              {rock.map((song) => (
-                <Col key={song.id} className="text-center" id="id">
-                  <MyCard />
-                </Col>
-              ))}
+              {rockSongs.length > 0 && (
+                <>
+                  {rockSongs.slice(0, 4).map((song) => (
+                    <Col key={song.id} className="text-center" id="id">
+                      <MyCard song={song} />
+                    </Col>
+                  ))}
+                </>
+              )}
             </Row>
           </div>
         </Col>
@@ -64,11 +68,15 @@ const Main = () => {
           <div id="pop">
             <h2>Pop Culture</h2>
             <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3" id="popSection">
-              {pop.map((song) => (
-                <Col key={song.id} className="text-center" id="id">
-                  <MyCard />
-                </Col>
-              ))}
+              {popSongs.length > 0 && (
+                <>
+                  {popSongs.slice(0, 4).map((song) => (
+                    <Col key={song.id} className="text-center" id="id">
+                      <MyCard song={song} />
+                    </Col>
+                  ))}
+                </>
+              )}
             </Row>
           </div>
         </Col>
@@ -77,13 +85,17 @@ const Main = () => {
       <Row>
         <Col xs={10}>
           <div id="hiphop">
-            <h2>HipHop</h2>
+            <h2>#HipHop</h2>
             <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3" id="hipHopSection">
-              {hiphop.map((song) => (
-                <Col key={song.id} className="text-center" id="id">
-                  <MyCard />
-                </Col>
-              ))}
+              {hipHopSongs.length > 0 && (
+                <>
+                  {hipHopSongs.slice(0, 4).map((song) => (
+                    <Col key={song.id} className="text-center" id="id">
+                      <MyCard song={song} />
+                    </Col>
+                  ))}
+                </>
+              )}
             </Row>
           </div>
         </Col>

@@ -225,3 +225,6 @@ ul {
 .mainPage img {
   width: 200px;
 }
+.link {
+  text-decoration: none;
+}
