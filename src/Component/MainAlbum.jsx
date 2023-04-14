@@ -3,6 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { albumAction } from "../Redux/ACTIONS";
+import MyTrack from "./MyTrack";
 
 const MainAlbum = () => {
   const params = useParams();
@@ -25,14 +26,22 @@ const MainAlbum = () => {
           <Link to="/">DISCOVER</Link>
         </Col>
       </Row>
-      <Row>
-        <Col md={3} className="pt-5 text-center" id="img-container"></Col>
-        <Col md={8} className="p-5">
-          <Row>
-            <Col md={10} className="mb-5" id="trackList"></Col>
-          </Row>
-        </Col>
-      </Row>
+      {album !== null && (
+        <Row className="w-100">
+          <Col md={3} className="pt-5 text-center" id="img-container">
+            <img src={album.cover_medium} alt="" />
+          </Col>
+          <Col md={8} className="p-5">
+            <Row>
+              {album.tracks.data.map((track) => (
+                <Col key={track.id} md={10} className="mb-5" id="trackList">
+                  <MyTrack track={track} />
+                </Col>
+              ))}
+            </Row>
+          </Col>
+        </Row>
+      )}
     </>
   );
 };
