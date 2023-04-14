@@ -1,7 +1,19 @@
+import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { albumAction } from "../Redux/ACTIONS";
 
 const MainAlbum = () => {
+  const params = useParams();
+  const dispatch = useDispatch();
+  const albumEndpoint = `https://striveschool-api.herokuapp.com/api/deezer/album/${params.id}`;
+  useEffect(() => {
+    dispatch(albumAction(albumEndpoint));
+  }, []);
+
+  const album = useSelector((state) => state.album.album);
+  console.log(album);
   return (
     <>
       <Row className="mb-3">

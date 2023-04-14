@@ -3,6 +3,8 @@ export const GET_POP = "GET_POP ";
 export const GET_HIP_HOP = " GET_HIP_POP";
 export const GET_SONG = "GET_SONG";
 export const SEARCH_SONG = "SEARCH_SONG";
+export const GET_ALBUM = "GET_ALBUM";
+
 export const getQueryAction = (query) => ({ type: GET_SONG, payload: query });
 export const getPopAction = (url) => {
   return async (dispatch) => {
@@ -52,6 +54,19 @@ export const cercaAction = (url) => {
       if (response.ok) {
         let songs = await response.json();
         dispatch({ type: SEARCH_SONG, payload: songs.data });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const albumAction = (url) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        let songs = await response.json();
+        dispatch({ type: GET_ALBUM, payload: songs });
       }
     } catch (error) {
       console.log(error);
