@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import MyNav from "./MyNav";
-import Player from "./Player";
+import Player from "./MyPlayer";
 import MainArtist from "./MainArtist";
 
 const Artist = () => {
