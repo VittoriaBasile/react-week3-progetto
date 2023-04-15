@@ -1,7 +1,19 @@
 import { Col, Row, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { artistAction } from "../Redux/ACTIONS";
+import { useEffect } from "react";
+import Tracks from "./Tracks";
 
 const MainArtist = () => {
+  const params = useParams();
+  const dispatch = useDispatch();
+  const artistEndpoint = `https://striveschool-api.herokuapp.com/api/deezer/artist/${params.id}`;
+  useEffect(() => {
+    dispatch(artistAction(artistEndpoint));
+  }, []);
+  const artist = useSelector((state) => state.artist.album);
+  console.log(artist);
   return (
     <>
       <Row className="mb-3">
@@ -13,32 +25,37 @@ const MainArtist = () => {
           <Link to="/">DISCOVER</Link>
         </Col>
       </Row>
+      {artist !== undefined && (
+        <>
+          <Row>
+            <Col className="col-12 col-md-10 col-lg-10 mt-5">
+              <h2 className="titleMain">{artist.name}</h2>
+              <div id="followers">followers: {artist.nb_fan}</div>
+              <div className="d-flex justify-content-center" id="button-container">
+                <Button className="btn btn-success mr-2 mainButton" id="playButton">
+                  PLAY
+                </Button>
+                <Button className="btn btn-outline-light mainButton" id="followButton">
+                  FOLLOW
+                </Button>
+              </div>
+            </Col>
+          </Row>
 
-      <Row>
-        <Col className="col-12 col-md-10 col-lg-10 mt-5">
-          <h2 className="titleMain"></h2>
-          <div id="followers"></div>
-          <div className="d-flex justify-content-center" id="button-container">
-            <Button className="btn btn-success mr-2 mainButton d-none" id="playButton">
-              PLAY
-            </Button>
-            <Button className="btn btn-outline-light mainButton d-none" id="followButton">
-              FOLLOW
-            </Button>
-          </div>
-        </Col>
-      </Row>
-
-      <Row className="mb-3">
-        <Col className="col-10 offset-1 col-md-10 col-lg-10 p-0">
-          <div className="mt-4 d-flex justify-content-start">
-            <h2 className="text-white font-weight-bold">Tracks</h2>
-          </div>
-          <div className="pt-5 mb-5">
-            <Row id="apiLoaded"></Row>
-          </div>
-        </Col>
-      </Row>
+          <Row className="mb-3">
+            <Col className="col-10 offset-1 col-md-10 col-lg-10 p-0">
+              <div className="mt-4 d-flex justify-content-start">
+                <h2 className="text-white font-weight-bold">
+                  <Tracks />
+                </h2>
+              </div>
+              <div className="pt-5 mb-5">
+                <Row id="apiLoaded"></Row>
+              </div>
+            </Col>
+          </Row>
+        </>
+      )}
     </>
   );
 };
