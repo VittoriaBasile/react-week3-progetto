@@ -29,7 +29,7 @@ const MainArtist = () => {
         <>
           <Row>
             <Col className="col-12 col-md-10 col-lg-10 mt-5 d-flex flex-column justyfy-content-center align-items-center">
-              <img className="my-3" src={artist.picture_big} alt="" />
+              <img className="my-3 imgArtist" src={artist.picture_big} alt="" />
               <h2 className="titleMain">{artist.name}</h2>
               <div id="followers">followers : {artist.nb_fan.toLocaleString()}</div>
               <div className="d-flex justify-content-center" id="button-container">
@@ -46,7 +46,7 @@ const MainArtist = () => {
           <Row className="mb-3">
             <Col className="col-10 offset-1 col-md-10 col-lg-10 p-0 ">
               <div className="mt-4 d-flex justify-content-start">
-                <h2 className="text-white font-weight-bold">Tracks</h2>
+                <h2 className="text-white font-weight-bold">Popolari</h2>
               </div>
               <div className="pt-5 mb-5">
                 <Row id="apiLoaded justify-content-start mx-0">

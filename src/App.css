@@ -221,10 +221,13 @@ ul {
 .artist-name {
   color: white;
 }
-
-.mainPage img {
+.imgArtist {
   width: 200px;
 }
+.coverTrack {
+  width: 50px;
+}
+
 .link {
   text-decoration: none;
 }
