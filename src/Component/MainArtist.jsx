@@ -1,7 +1,7 @@
 import { Col, Row, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { artistAction } from "../Redux/ACTIONS";
+import { artistAction, getArtistIdAction } from "../Redux/ACTIONS";
 import { useEffect } from "react";
 import Tracks from "./Tracks";
 
@@ -13,7 +13,7 @@ const MainArtist = () => {
     dispatch(artistAction(artistEndpoint));
   }, []);
   const artist = useSelector((state) => state.artist.album);
-  console.log(artist);
+
   return (
     <>
       <Row className="mb-3">
